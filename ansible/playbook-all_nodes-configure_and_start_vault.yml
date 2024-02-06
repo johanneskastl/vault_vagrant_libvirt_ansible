@@ -1,0 +1,52 @@
+---
+- name: 'Configure and start vault'
+  hosts: 'all'
+  gather_facts: true
+  become: true
+
+  tasks:
+
+    - name: 'Create group vault'
+      ansible.builtin.group:
+        name: 'vault'
+        system: true
+
+    - name: 'Create user vault'
+      ansible.builtin.user:
+        name: 'vault'
+        group: 'vault'
+        shell: '/bin/false'
+        system: true
+
+    - name: 'Create directory /var/lib/vault/'
+      ansible.builtin.file:
+        path: '/var/lib/vault/'
+        state: 'directory'
+        owner: 'vault'
+        group: 'vault'
+        mode: '0755'
+
+    - name: 'Create directory /var/lib/vault/data/'
+      ansible.builtin.file:
+        path: '/var/lib/vault/data/'
+        state: 'directory'
+        owner: 'vault'
+        group: 'vault'
+        mode: '0755'
+
+    - name: 'Create /etc/vault.d/vault.hcl'
+      ansible.builtin.template:
+        src: 'vault.hcl.j2'
+        dest: '/etc/vault.d/vault.hcl'
+        owner: 'vault'
+        group: 'vault'
+        mode: '0644'
+      notify:
+        - 'Restart vault.service'
+
+  handlers:
+
+    - name: 'Restart vault.service'
+      ansible.builtin.service:
+        name: 'vault.service'
+        state: 'restarted'
