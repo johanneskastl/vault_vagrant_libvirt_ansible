@@ -12,6 +12,14 @@
         home: '/var/lib/vault/'
         create_home: true
 
+    - name: 'Create vault.service.d/'
+      ansible.builtin.file:
+        path: '/etc/systemd/system/vault.service.d/'
+        state: 'directory'
+        owner: 'root'
+        group: 'root'
+        mode: '0755'
+
     - name: 'Create vault.service.d/override.conf'
       ansible.builtin.template:
         src: 'override.conf.j2'
