@@ -6,6 +6,12 @@
 
   tasks:
 
+    - name: 'Manage vault user (add home directory)'
+      ansible.builtin.user:
+        name: 'vault'
+        home: '/var/lib/vault/'
+        create_home: true
+
     - name: 'Create /etc/vault.d/vault.hcl'
       ansible.builtin.template:
         src: 'vault.hcl.j2'
