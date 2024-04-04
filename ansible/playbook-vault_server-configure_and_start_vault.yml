@@ -1,6 +1,6 @@
 ---
 - name: 'Configure and start vault'
-  hosts: 'all'
+  hosts: 'vault'
   gather_facts: true
   become: true
 
