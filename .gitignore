@@ -3,3 +3,6 @@
 #
 .vagrant
 Vagrantfile.1
+
+# Vault root token
+ansible/vault_root_token
