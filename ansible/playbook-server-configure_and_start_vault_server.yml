@@ -19,6 +19,8 @@
         owner: 'root'
         group: 'root'
         mode: '0755'
+      notify:
+        - 'Restart vault.service'
 
     - name: 'Create vault.service.d/override.conf'
       ansible.builtin.template:
@@ -67,3 +69,4 @@
       ansible.builtin.service:
         name: 'vault.service'
         state: 'restarted'
+        daemon_reload: true
