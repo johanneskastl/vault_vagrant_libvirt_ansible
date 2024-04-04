@@ -28,3 +28,6 @@
 [submodule "ansible/roles/b1-systems-ansible-role-suseconnect"]
 	path = ansible/roles/b1-systems-ansible-role-suseconnect
 	url = https://github.com/b1-systems/ansible-role-suseconnect.git
+[submodule "ansible/roles/johanneskastl.start_and_or_enable_systemd_service"]
+	path = ansible/roles/johanneskastl.start_and_or_enable_systemd_service
+	url = https://github.com/johanneskastl/ansible-role-start_and_or_enable_systemd_service.git
