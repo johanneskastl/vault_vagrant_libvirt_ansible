@@ -40,6 +40,18 @@
       notify:
         - 'Restart vault.service'
 
+    - name: 'Flush handlers'
+      ansible.builtin.meta: flush_handlers
+
+    - name: 'Fetch Vault root token'
+      ansible.builtin.slurp:
+        src: '/var/lib/vault/.vault-token'
+      register: slurp_vault_token
+
+    - name: 'Print Vault root token'
+      ansible.builtin.debug:
+        msg: "The Vault root token is: {{ slurp_vault_token.content | b64decode }}"
+
   handlers:
 
     - name: 'Restart vault.service'
