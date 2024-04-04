@@ -25,24 +25,44 @@ is enough for a demo.
 1. Make sure the git submodules are fully working by issuing `git submodule init
    && git submodule update`
 1. Run `vagrant up`
+1. At the end of the Ansible provisioning, Ansible prints out a message like the
+   following:
+
+   ```bash
+   TASK [Output URL] *******************************************************************************
+   ok: [vault-client] => {
+       "msg": "The website containing the 'secret' from Vault is reachable at http://192.0.2.13"
+   }
+   ```
+
+1. Open the URL that Ansible displayed at the end of the run. You should see the
+   secret value that Ansible wrote to Vault previously, fetched from Vault by
+   the Vault agent and saved into Nginx's `index.html` file:
+
+```bash
+$ curl http://192.0.2.13
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>vault_vagrant_libvirt_ansible</h1>
+
+<p>The secret stored in Vault is: vagrant-libvirt</p>
+
+
+</body>
+</html>
+```
+
 1. Log in on the vault-client VM using `vagrant ssh vault-client`.
-1. Get the token from `/var/lib/vault/vault-token-via-agent`
-1. Run the following commands and replace `192.0.2.13` with the vault server
-   VM's IP address:
+1. Ansible already added a line to `.bashrc` for the `root` and `vagrant` users
+   to set the Vault address:
 
    ```bash
    export VAULT_ADDR='http://192.0.2.13:8200'
    ```
 
-1. Log in using the token you got from the
-   `/var/lib/vault/vault-token-via-agent` file:
-
-   ```bash
-   $ vault login
-   Token (will be hidden):
-   $
-   ```
-
+1. You should already be logged in and can start working with Vault.
 1. Play around with Vault, e.g. get information on your token using `vault token
    lookup`.
 1. Party!
