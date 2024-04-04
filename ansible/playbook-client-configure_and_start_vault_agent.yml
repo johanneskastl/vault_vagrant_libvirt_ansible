@@ -77,6 +77,16 @@
       notify:
         - 'Restart vault-agent.service'
 
+    - name: 'Create /etc/vault.d/nginx.tmpl'
+      ansible.builtin.template:
+        src: 'nginx.tmpl.j2'
+        dest: '/etc/vault.d/nginx.tmpl'
+        owner: 'vault'
+        group: 'vault'
+        mode: '0644'
+      notify:
+        - 'Restart vault-agent.service'
+
     - name: 'Start vault-agent.service'
       ansible.builtin.service:
         name: 'vault-agent.service'
