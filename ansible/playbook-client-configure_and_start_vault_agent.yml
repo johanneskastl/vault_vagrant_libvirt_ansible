@@ -1,0 +1,60 @@
+---
+- name: 'Gather facts'
+  hosts: 'all'
+  gather_facts: true
+
+- name: 'Configure and start vault agent'
+  hosts: 'vault-client'
+  gather_facts: true
+  become: true
+
+  tasks:
+
+    - name: 'Manage vault user (add home directory)'
+      ansible.builtin.user:
+        name: 'vault'
+        home: '/var/lib/vault/'
+        create_home: true
+
+    - name: 'Create the .vault-token file'
+      ansible.builtin.copy:
+        dest: '/var/lib/vault/.vault-token'
+        content: "{{ vault_root_token }}"
+        owner: 'vault'
+        group: 'vault'
+        mode: '0600'
+      notify:
+        - 'Restart vault-agent.service'
+
+    - name: 'Create the vault-agent.service file'
+      ansible.builtin.template:
+        src: 'vault-agent.service.j2'
+        dest: '/etc/systemd/system/vault-agent.service'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+      notify:
+        - 'Restart vault-agent.service'
+
+    - name: 'Create /etc/vault.d/vault-agent.hcl'
+      ansible.builtin.template:
+        src: 'vault-agent.hcl.j2'
+        dest: '/etc/vault.d/vault-agent.hcl'
+        owner: 'vault'
+        group: 'vault'
+        mode: '0644'
+      notify:
+        - 'Restart vault-agent.service'
+
+    - name: 'Start vault-agent.service'
+      ansible.builtin.service:
+        name: 'vault-agent.service'
+        state: 'started'
+        enabled: false
+
+  handlers:
+
+    - name: 'Restart vault-agent.service'
+      ansible.builtin.service:
+        name: 'vault-agent.service'
+        state: 'restarted'
