@@ -81,6 +81,22 @@
       delegate_to: 'localhost'
       become: false
 
+    - name: 'Save root token for the root user'
+      ansible.builtin.copy:
+        dest: '/root/.vault-token'
+        content: "{{ slurp_vault_token.content | b64decode }}"
+        owner: 'root'
+        group: 'root'
+        mode: '0600'
+
+    - name: 'Save root token for vagrant user'
+      ansible.builtin.copy:
+        dest: '/home/vagrant/.vault-token'
+        content: "{{ slurp_vault_token.content | b64decode }}"
+        owner: 'vagrant'
+        group: 'vagrant'
+        mode: '0600'
+
     - name: 'Print Vault root token'
       ansible.builtin.debug:
         msg: "The Vault root token is: {{ slurp_vault_token.content | b64decode }}"
