@@ -18,5 +18,5 @@
 - name: 'Run playbook-all_nodes-install_vault.yml'
   ansible.builtin.import_playbook: playbook-all_nodes-install_vault.yml
 
-- name: 'Run playbook-vault_server-configure_and_start_vault.yml'
-  ansible.builtin.import_playbook: playbook-vault_server-configure_and_start_vault.yml
+- name: 'Run playbook-vault_server-configure_and_start_vault_server.yml'
+  ansible.builtin.import_playbook: playbook-vault_server-configure_and_start_vault_server.yml
