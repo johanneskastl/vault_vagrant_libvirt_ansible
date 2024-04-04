@@ -1,0 +1,18 @@
+vault {
+   address = "http://{{ hostvars['vault']['ansible_default_ipv4']['address'] }}:8200"
+   tls_skip_verify = true
+}
+
+auto_auth {
+   method {
+      type = "token_file"
+      config = {
+         token_file_path = "/var/lib/vault/.vault-token"
+      }
+   }
+   sink "file" {
+      config = {
+            path = "/var/lib/vault/vault-token-via-agent"
+      }
+   }
+}
