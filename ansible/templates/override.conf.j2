@@ -1,4 +1,4 @@
 [Service]
 WorkingDirectory=/var/lib/vault/
 ExecStart=
-ExecStart=/usr/bin/vault server -dev
+ExecStart=/usr/bin/vault server -dev -dev-listen-address={{ ansible_default_ipv4['address'] }}:8200
