@@ -16,3 +16,8 @@ auto_auth {
       }
    }
 }
+
+template {
+  source      = "/etc/vault.d/nginx.tmpl"
+  destination = "/srv/www/htdocs/index.html"
+}
