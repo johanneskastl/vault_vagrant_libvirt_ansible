@@ -1,6 +1,6 @@
 ---
 - name: 'Add the Branch_Security zypper repository'
-  hosts: 'vault'
+  hosts: 'all'
   gather_facts: true
   become: true
 
