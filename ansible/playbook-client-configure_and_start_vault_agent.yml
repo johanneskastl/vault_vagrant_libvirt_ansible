@@ -8,6 +8,19 @@
   gather_facts: true
   become: true
 
+  pre_tasks:
+
+    - name: 'Fetch Vault root token from local file'
+      ansible.builtin.slurp:
+        src: 'vault_root_token'
+      register: slurp_vault_token
+      delegate_to: 'localhost'
+      become: false
+
+    - name: 'Set fact for the Vault root token'
+      ansible.builtin.set_fact:
+        vault_root_token: "{{ slurp_vault_token.content | b64decode }}"
+
   tasks:
 
     - name: 'Manage vault user (add home directory)'
