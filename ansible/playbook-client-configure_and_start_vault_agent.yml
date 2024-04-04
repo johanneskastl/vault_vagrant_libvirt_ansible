@@ -100,6 +100,14 @@
         state: 'started'
         enabled: false
 
+    - name: 'Print Vault root token'
+      ansible.builtin.debug:
+        msg: "The Vault root token is: {{ slurp_vault_token.content | b64decode }}"
+
+    - name: 'Output Vault URL'
+      ansible.builtin.debug:
+        msg: "The Vault Server is reachable at: http://{{ hostvars['vault']['ansible_default_ipv4']['address'] }}:8200"
+
     - name: 'Output URL'
       ansible.builtin.debug:
         msg: "The website containing the 'secret' from Vault is reachable at http://{{ ansible_default_ipv4['address'] }}"
