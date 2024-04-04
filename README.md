@@ -47,6 +47,12 @@ is enough for a demo.
    lookup`.
 1. Party!
 
+## Cleaning up
+
+The VMs can be torn down after playing around using `vagrant destroy`. There is
+one file that needs to be removed manually. This file contains the Vault root
+token and is located at `ansible/vault_root_token`.
+
 ## Disabling the Ansible provisioning
 
 In case you do not want Ansible to install Vault (because you want to install
