@@ -65,6 +65,16 @@ $ curl http://192.0.2.13
 1. You should already be logged in and can start working with Vault.
 1. Play around with Vault, e.g. get information on your token using `vault token
    lookup`.
+1. Have a look around the Vault server's WebUI, whose URL Ansible also prints
+   out:
+
+   ```bash
+   TASK [Output Vault URL] ********************************************************
+   ok: [vault-client] => {
+       "msg": "The Vault Server is reachable at: http://192.168.2.13:8200"
+   }
+   ```
+
 1. Party!
 
 ## Cleaning up
