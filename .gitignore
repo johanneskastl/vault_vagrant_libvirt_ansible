@@ -3,6 +3,3 @@
 #
 .vagrant
 Vagrantfile.1
-
-# Vault token
-ansible/group_vars/all/vault_root_token.yml
