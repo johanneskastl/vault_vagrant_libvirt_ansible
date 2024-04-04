@@ -1,6 +1,6 @@
 ---
 - name: 'Install vault'
-  hosts: 'vault'
+  hosts: 'all'
   gather_facts: true
   become: true
 
