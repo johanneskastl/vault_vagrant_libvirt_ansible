@@ -41,6 +41,13 @@
         group: 'vagrant'
         mode: '0644'
 
+    - name: 'Set permissions for vault user on directory/srv/www/htdocs/'
+      ansible.builtin.file:
+        path: '/srv/www/htdocs/'
+        owner: 'vault'
+        group: 'vault'
+        mode: '0755'
+
     - name: 'Manage vault user (add home directory)'
       ansible.builtin.user:
         name: 'vault'
