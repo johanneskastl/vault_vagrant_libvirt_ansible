@@ -1,0 +1,3 @@
+{{ '{{' }} with secret "secret/data/foo" {{ '}}' }}
+The secret stored in Vault is: {{ '{{' }} .Data.data.test {{ '}}' }}
+{{ '{{' }} end {{ '}}' }}
