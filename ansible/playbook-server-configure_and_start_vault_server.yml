@@ -42,6 +42,12 @@
       notify:
         - 'Restart vault.service'
 
+    - name: 'Start but do NOT enable the vault.service (server is running in dev mode, all changes are lost after a restart...)'
+      ansible.builtin.service:
+        name: 'vault.service'
+        state: 'started'
+        enabled: false
+
     - name: 'Flush handlers'
       ansible.builtin.meta: flush_handlers
 
