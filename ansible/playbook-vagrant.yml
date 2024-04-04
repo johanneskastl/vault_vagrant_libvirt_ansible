@@ -21,5 +21,8 @@
 - name: 'Run playbook-server-configure_and_start_vault_server.yml'
   ansible.builtin.import_playbook: playbook-server-configure_and_start_vault_server.yml
 
+- name: 'Run playbook-server-add_entries_to_vault_server.yml'
+  ansible.builtin.import_playbook: playbook-server-add_entries_to_vault_server.yml
+
 - name: 'Run playbook-client-configure_and_start_vault_agent.yml'
   ansible.builtin.import_playbook: playbook-client-configure_and_start_vault_agent.yml
