@@ -48,6 +48,15 @@
         src: '/var/lib/vault/.vault-token'
       register: slurp_vault_token
 
+    - name: 'Save root token on Ansible control node'
+      ansible.builtin.copy:
+        dest: 'group_vars/all/vault_root_token.yml'
+        content: |
+          ---
+          vault_root_token: "{{ slurp_vault_token.content | b64decode }}"
+      delegate_to: 'localhost'
+      become: false
+
     - name: 'Print Vault root token'
       ansible.builtin.debug:
         msg: "The Vault root token is: {{ slurp_vault_token.content | b64decode }}"
