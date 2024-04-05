@@ -15,8 +15,8 @@
 - name: 'Run playbook-all_nodes-add_Branch_Security_repo.yml'
   ansible.builtin.import_playbook: playbook-all_nodes-add_Branch_Security_repo.yml
 
-- name: 'Run playbook-all_nodes-install_vault.yml'
-  ansible.builtin.import_playbook: playbook-all_nodes-install_vault.yml
+- name: 'Run playbook-server-install_vault-server.yml'
+  ansible.builtin.import_playbook: playbook-server-install_vault-server.yml
 
 - name: 'Run playbook-server-configure_and_start_vault_server.yml'
   ansible.builtin.import_playbook: playbook-server-configure_and_start_vault_server.yml
