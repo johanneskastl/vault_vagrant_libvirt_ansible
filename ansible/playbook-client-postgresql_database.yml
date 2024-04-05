@@ -22,3 +22,14 @@
       postgresql_database_name: 'vault-example-database'
       postgresql_user_name: 'example-user'
       postgresql_user_password: 'anothertotallysecurepassword'
+
+  post_tasks:
+
+    - name: 'Allow connections for postgres user from everywhere'
+      community.postgresql.postgresql_pg_hba:
+        dest: '/var/lib/pgsql/data/pg_hba.conf'
+        contype: 'host'
+        users: 'postgres'
+        source: '0.0.0.0/0'
+        databases: 'all'
+        method: 'md5'
