@@ -77,6 +77,42 @@ $ curl http://192.0.2.13
 
 1. Party!
 
+## Vault and PostgreSQL
+
+The Ansible provisioning installs and configures a PostgreSQL database on the
+Vault client and adds a file on the Vault server at
+`/root/postgresql_vault_snippet.txt`. This file contains commands that you can
+use to configure the [Vault PostgreSQL
+plugin](https://developer.hashicorp.com/vault/docs/secrets/databases/postgresql).
+
+```
+vault secrets enable database
+
+vault write database/config/vagrant-libvirt-postgresql-database \
+    plugin_name="postgresql-database-plugin" \
+    allowed_roles="vagrant-libvirt-role" \
+    connection_url="postgresql://{{username}}:{{password}}@192.168.121.98:5432/vault-example-database" \
+    username="postgres" \
+    password="totallysecurepassword" \
+    password_authentication="scram-sha-256"
+
+vault write database/roles/vagrant-libvirt-role \
+    db_name="vagrant-libvirt-postgresql-database" \
+    creation_statements="CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; \
+        GRANT SELECT ON ALL TABLES IN SCHEMA public TO \"{{name}}\";" \
+    default_ttl="1h" \
+    max_ttl="24h"
+
+vault read database/config/vagrant-libvirt-postgresql-database
+vault read database/roles/vagrant-libvirt-role
+
+vault read database/creds/vagrant-libvirt-role
+```
+
+This will allow you to get a new set of database credentials from Vault via
+`vault read database/creds/vagrant-libvirt-role`, that you can use to connect to
+the database from both the Vault server VM or the client VM.
+
 ## Cleaning up
 
 The VMs can be torn down after playing around using `vagrant destroy`. There is
