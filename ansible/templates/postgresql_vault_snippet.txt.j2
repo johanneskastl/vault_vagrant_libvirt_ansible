@@ -20,3 +20,6 @@ vault read database/config/vagrant-libvirt-postgresql-database
 vault read database/roles/vagrant-libvirt-role
 
 vault read database/creds/vagrant-libvirt-role
+
+# replace XXX with the user from the last command
+psql -h {{ hostvars['vault-client']['ansible_default_ipv4']['address'] }} -d vault-example-database -U XXX
