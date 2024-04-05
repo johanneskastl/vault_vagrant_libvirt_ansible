@@ -33,3 +33,12 @@
         source: '0.0.0.0/0'
         databases: 'all'
         method: 'md5'
+
+    - name: 'Allow connections for all user from everywhere'
+      community.postgresql.postgresql_pg_hba:
+        dest: '/var/lib/pgsql/data/pg_hba.conf'
+        contype: 'host'
+        users: 'all'
+        source: '0.0.0.0/0'
+        databases: 'all'
+        method: 'scram-sha-256'
