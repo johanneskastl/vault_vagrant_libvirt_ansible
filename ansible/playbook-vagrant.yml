@@ -32,6 +32,9 @@
 - name: 'Run playbook-server-add_entries_to_vault_server.yml'
   ansible.builtin.import_playbook: playbook-server-add_entries_to_vault_server.yml
 
+- name: 'Run playbook-server-postgresl_vault_plugin.yml'
+  ansible.builtin.import_playbook: playbook-server-postgresl_vault_plugin.yml
+
 #
 # Vault client VM
 #
