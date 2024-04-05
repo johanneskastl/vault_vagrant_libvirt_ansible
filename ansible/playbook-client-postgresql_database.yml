@@ -16,3 +16,9 @@
     - role: 'johanneskastl.install_and_start_postgresql'
       only_listen_on_localhost: false
       postgresql_superuser_password: 'totallysecurepassword'
+    - role: 'johanneskastl.configure_a_postgresql_database'
+      postgresql_login_user: 'postgres'
+      postgresql_login_password: 'totallysecurepassword'
+      postgresql_database_name: 'vault-example-database'
+      postgresql_user_name: 'example-user'
+      postgresql_user_password: 'anothertotallysecurepassword'
