@@ -14,3 +14,5 @@
   roles:
 
     - role: 'johanneskastl.install_and_start_postgresql'
+      only_listen_on_localhost: false
+      postgresql_superuser_password: 'totallysecurepassword'
