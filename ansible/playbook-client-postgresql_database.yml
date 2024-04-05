@@ -33,3 +33,12 @@
         source: '0.0.0.0/0'
         databases: 'all'
         method: 'scram-sha-256'
+      notify:
+        - 'Restart postgresql'
+
+  handlers:
+
+    - name: 'Restart postgresql'
+      ansible.builtin.service:
+        name: 'postgresql.service'
+        state: 'restarted'
