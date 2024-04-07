@@ -95,7 +95,7 @@ vault secrets enable database
 vault write database/config/vagrant-libvirt-postgresql-database \
     plugin_name="postgresql-database-plugin" \
     allowed_roles="vagrant-libvirt-role" \
-    connection_url="postgresql://{{username}}:{{password}}@192.168.121.98:5432/vault-example-database" \
+    connection_url="postgresql://{{username}}:{{password}}@192.0.2.14:5432/vault-example-database" \
     username="postgres" \
     password="totallysecurepassword" \
     password_authentication="scram-sha-256"
@@ -111,11 +111,16 @@ vault read database/config/vagrant-libvirt-postgresql-database
 vault read database/roles/vagrant-libvirt-role
 
 vault read database/creds/vagrant-libvirt-role
+
+# replace XXX with the user from the last command
+psql -h 192.0.2.14 -d vault-example-database -U XXX
 ```
 
 This will allow you to get a new set of database credentials from Vault via
 `vault read database/creds/vagrant-libvirt-role`, that you can use to connect to
 the database from both the Vault server VM or the client VM.
+
+Of course, the file will contain a different IP address in your case...
 
 ## Cleaning up
 
