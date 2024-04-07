@@ -23,20 +23,22 @@
 
   tasks:
 
-    - name: 'Add environment variable to /root/.bashrc'
+    - name: 'Add environment variable to /root/.profile'
       ansible.builtin.lineinfile:
-        path: '/root/.bashrc'
+        path: '/root/.profile'
         regexp: '^export VAULT_ADDR'
         line: "export VAULT_ADDR='http://{{ hostvars['vault']['ansible_default_ipv4']['address'] }}:8200'"
+        create: true
         owner: 'root'
         group: 'root'
         mode: '0644'
 
-    - name: 'Add environment variable to /home/vagrant/.bashrc'
+    - name: 'Add environment variable to /home/vagrant/.profile'
       ansible.builtin.lineinfile:
-        path: '/home/vagrant/.bashrc'
+        path: '/home/vagrant/.profile'
         regexp: '^export VAULT_ADDR'
         line: "export VAULT_ADDR='http://{{ hostvars['vault']['ansible_default_ipv4']['address'] }}:8200'"
+        create: true
         owner: 'vagrant'
         group: 'vagrant'
         mode: '0644'

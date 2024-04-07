@@ -1,0 +1,26 @@
+---
+- name: 'Gather facts'
+  hosts: 'all'
+  gather_facts: true
+  become: true
+
+- name: 'Postgresql stuff'
+  hosts: 'vault'
+  gather_facts: true
+  become: true
+
+  tasks:
+
+    - name: 'Install postgresql client tools'
+      ansible.builtin.package:
+        name:
+          - 'vault-postgresql-database-plugin'
+          - 'postgresql16'
+
+    - name: 'Prepare snippet with Vault Postgres commands'
+      ansible.builtin.template:
+        src: 'postgresql_vault_snippet.txt.j2'
+        dest: '/root/postgresql_vault_snippet.txt'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'

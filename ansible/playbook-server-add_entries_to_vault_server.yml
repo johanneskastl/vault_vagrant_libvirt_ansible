@@ -7,14 +7,16 @@
   tasks:
 
     - name: 'Write a value'
-      community.hashi_vault.vault_write:
+      community.hashi_vault.vault_kv2_write:
+        # authentication and Vault URL
         url: "http://{{ hostvars['vault']['ansible_default_ipv4']['address'] }}:8200"
-        path: 'secret/data/foo'
-        data:
-          data:
-            test: 'vagrant-libvirt'
-        auth_method: 'token'
         token_file: 'vault_root_token'
         token_path: "{{ playbook_dir }}"
+        auth_method: 'token'
+        # actual things to do
+        path: 'foo'
+        data:
+          test: 'vagrant-libvirt'
+        read_before_write: true
       delegate_to: 'localhost'
       become: false
