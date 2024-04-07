@@ -89,7 +89,7 @@ Vault client and adds a file on the Vault server at
 use to configure the [Vault PostgreSQL
 plugin](https://developer.hashicorp.com/vault/docs/secrets/databases/postgresql).
 
-```
+```bash
 vault secrets enable database
 
 vault write database/config/vagrant-libvirt-postgresql-database \
@@ -103,7 +103,7 @@ vault write database/config/vagrant-libvirt-postgresql-database \
 vault write database/roles/vagrant-libvirt-role \
     db_name="vagrant-libvirt-postgresql-database" \
     creation_statements="CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; \
-        GRANT SELECT ON ALL TABLES IN SCHEMA public TO \"{{name}}\";" \
+    GRANT SELECT ON ALL TABLES IN SCHEMA public TO \"{{name}}\";" \
     default_ttl="1h" \
     max_ttl="24h"
 
