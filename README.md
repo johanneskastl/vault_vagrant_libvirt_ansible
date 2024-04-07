@@ -43,20 +43,20 @@ Server VM. Details can be found in the section on Vault and PostgreSQL below.
    secret value that Ansible wrote to Vault previously, fetched from Vault by
    the Vault agent and saved into Nginx's `index.html` file:
 
-```bash
-$ curl http://192.0.2.13
-<!DOCTYPE html>
-<html>
-<body>
+   ```bash
+   $ curl http://192.0.2.13
+   <!DOCTYPE html>
+   <html>
+   <body>
 
-<h1>vault_vagrant_libvirt_ansible</h1>
+   <h1>vault_vagrant_libvirt_ansible</h1>
 
-<p>The secret stored in Vault is: vagrant-libvirt</p>
+   <p>The secret stored in Vault is: vagrant-libvirt</p>
 
 
-</body>
-</html>
-```
+   </body>
+   </html>
+   ```
 
 1. Log in on the vault-client VM using `vagrant ssh vault-client`.
 1. Ansible already added a line to `.bashrc` for the `root` and `vagrant` users
