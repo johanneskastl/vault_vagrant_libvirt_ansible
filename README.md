@@ -124,9 +124,9 @@ Of course, the file will contain a different IP address in your case...
 
 ## Cleaning up
 
-The VMs can be torn down after playing around using `vagrant destroy`. There is
-one file that needs to be removed manually. This file contains the Vault root
-token and is located at `ansible/vault_root_token`.
+The VMs can be torn down after playing around using `vagrant destroy`. This will
+also remove the file containing the vault token, located at
+`ansible/vault_root_token`.
 
 ## Disabling the Ansible provisioning
 
