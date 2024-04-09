@@ -20,7 +20,7 @@
       postgresql_login_user: 'postgres'
       postgresql_login_password: 'totallysecurepassword'
       postgresql_database_name: 'vault-example-database'
-      postgresql_user_name: 'example-user'
+      postgresql_user_name: 'vault-user'
       postgresql_user_password: 'anothertotallysecurepassword'
       postgresql_user_role_attr_flags: 'SUPERUSER,CREATEROLE,CREATEDB'
 
