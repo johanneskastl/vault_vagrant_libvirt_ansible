@@ -18,7 +18,7 @@ This is also something that needs to be done properly in a production setup, but
 is enough for a demo.
 
 Ansible installs and configures a PostgreSQL database on the vault-client VM and
-adds a instructions on how to setup the Vault PostgreSQL plugin to the vault
+adds instructions on how to setup the Vault PostgreSQL plugin to the vault
 Server VM. Details can be found in the section on Vault and PostgreSQL below.
 
 ## Vagrant
