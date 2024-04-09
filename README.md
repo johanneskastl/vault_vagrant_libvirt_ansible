@@ -136,11 +136,7 @@ it yourself), just comment out the following lines in the `Vagrantfile`:
 ```hcl
     node.vm.provision "ansible" do |ansible|
       ansible.compatibility_mode = "2.0"
-          ansible.limit = "all"
-          ansible.groups = {
-            "vault_clients"  => [ "vault-client" ],
-            "vault_server"  => [ "vault" ]
-          }
+        ansible.limit = "all"
       ansible.playbook = "ansible/playbook-vagrant.yml"
     end # node.vm.provision
 ```
